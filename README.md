@@ -18,8 +18,10 @@
 
 ### go get -u gorm.io/driver/mysql
 
+## jwt-go
+
+### go get -u github.com/dgrijalva/jwt-go
+
 # go run启动
-
-
 
 ## go run main.go
