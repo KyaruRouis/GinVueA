@@ -60,8 +60,9 @@ func LoginPassword(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code": 200,
-		"msg":  "登录成功",
-		"data": data,
+		"code":     200,
+		"msg":      "登录成功",
+		"result":   data,
+		"userInfo": sysUser,
 	})
 }
