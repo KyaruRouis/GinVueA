@@ -23,3 +23,12 @@ func GetUserByUsernamePassword(username string, password string) (*SysUser, erro
 	err := DB.Where("username = ? AND password = ?", username, password).First(data).Error
 	return data, err
 }
+
+// GetUserList 获取管理员数据列表
+func GetUserList(keyword string) *gorm.DB {
+	tx := DB.Model(new(SysUser)).Select("id,username,phone,avatar,created_at,updated_at")
+	if keyword != "" {
+		tx = tx.Where("username LIKE ?", "%"+keyword+"%")
+	}
+	return tx
+}

@@ -50,3 +50,38 @@
 
 ##### 新增Cors跨域函数
 
+## 管理员功能实现
+
+### 获取管理员列表数据
+
+#### models/sys_user.go
+
+##### 新增GetUserList的函数用于获取管理员信息列表数据
+
+#### service/types.go
+
+##### 新增GetUserListRequest结构体
+
+##### 新增QueryRequest结构体
+
+##### 新增GetUserListReply结构体
+
+#### service/init.go
+
+##### 新增init.go文件
+
+##### 新增NewQueryRequest函数
+
+#### define/define.go
+
+##### 新增默认分页显示条数
+
+#### service/user.go
+
+##### 新增user.go文件
+
+##### 新增GetUserList函数
+
+#### router/app.go
+
+##### 新增获取管理员列表数据的路由
