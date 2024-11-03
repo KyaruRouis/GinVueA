@@ -4,6 +4,7 @@ import (
 	"GinVueA/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 // GetUserList 获取管理员列表数据
@@ -54,7 +55,7 @@ func AddUser(c *gin.Context) {
 	}
 	// 1.判断用户名已经存在
 	var cnt int64
-	err = models.DB.Model(new(models.SysUser)).Where("username = ?", in.UserName).Count(&cnt).Error
+	err = models.DB.Model(new(models.SysUser)).Where("username = ?", in.Username).Count(&cnt).Error
 
 	// 大于0说明用户已经存在
 	if cnt > 0 {
@@ -66,11 +67,11 @@ func AddUser(c *gin.Context) {
 	}
 	// 2.保存数据
 	err = models.DB.Create(&models.SysUser{
-		UserName: in.UserName,
+		UserName: in.Username,
 		PassWord: in.Password,
 		Phone:    in.Phone,
 		Email:    in.Email,
-		Remarks:  in.Remark,
+		Remarks:  in.Remarks,
 	}).Error
 
 	if err != nil {
@@ -84,5 +85,41 @@ func AddUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "保存成功",
+	})
+}
+
+// GetUserDetail 根据ID获取管理员详情信息
+func GetUserDetail(c *gin.Context) {
+	id := c.Query("id")
+	if id == "" {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"msg":  "ID不能为空",
+		})
+		return
+	}
+
+	uId, err := strconv.Atoi(id)
+	data := new(GetUserDetailReply)
+	// 1.获取管理员信息
+	sysUser, err := models.GetUserDetail(uint(uId))
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"msg":  "数据库异常",
+		})
+		return
+	}
+
+	data.ID = sysUser.ID
+	data.Remarks = sysUser.Remarks
+	data.Phone = sysUser.Phone
+	data.Username = sysUser.UserName
+	data.Email = sysUser.Email
+	data.Password = sysUser.PassWord
+	c.JSON(http.StatusOK, gin.H{
+		"code":   200,
+		"msg":    "获取数据成功",
+		"result": data,
 	})
 }

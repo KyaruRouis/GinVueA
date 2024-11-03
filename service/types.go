@@ -36,9 +36,15 @@ type GetUserListReply struct {
 
 // AddUserRequest 接收添加管理员表单数据的结构体
 type AddUserRequest struct {
-	UserName string `json:"username"`
+	Username string `json:"username"`
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
 	Email    string `json:"email"`
-	Remark   string `json:"remark"`
+	Remarks  string `json:"remark"`
+}
+
+// GetUserDetailReply 获取管理员信息
+type GetUserDetailReply struct {
+	ID uint `json:"id"`
+	AddUserRequest
 }

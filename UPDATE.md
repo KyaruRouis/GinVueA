@@ -102,4 +102,23 @@
 
 #### router/app.go
 
-##### 添加新增管理员信息路由地址
+##### 添加管理员信息路由地址
+
+### 获取管理员详情功能实现
+
+#### service/types.go
+
+##### 新增GetUserDetailReply数据结构
+
+#### models/sys_user.go
+
+##### 新增GetUserDetail函数
+
+#### service/user.go
+
+##### 新增GetUserDetail函数
+
+#### router/app.go
+
+##### 添加管理员详情信息路由地址
+
