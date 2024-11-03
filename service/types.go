@@ -19,8 +19,8 @@ type GetUserListRequest struct {
 
 // QueryRequest 关键字和分页信息结构体
 type QueryRequest struct {
-	Page    int    `json:"pageIndex" form:"page"`
-	Size    int    `json:"pageSize" form:"size"`
+	Page    int    `json:"pageIndex" form:"pageIndex"`
+	Size    int    `json:"pageSize" form:"pageSize"`
 	Keyword string `json:"keyword" form:"keyword"`
 }
 
