@@ -33,3 +33,12 @@ type GetUserListReply struct {
 	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
 }
+
+// AddUserRequest 接收添加管理员表单数据的结构体
+type AddUserRequest struct {
+	UserName string `json:"username"`
+	Password string `json:"password"`
+	Phone    string `json:"phone"`
+	Email    string `json:"email"`
+	Remark   string `json:"remark"`
+}

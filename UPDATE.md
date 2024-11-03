@@ -85,3 +85,21 @@
 #### router/app.go
 
 ##### 新增获取管理员列表数据的路由
+
+### 添加管理员
+
+#### models/sys_user.go
+
+##### 修改Sysuser结构
+
+#### service/types.go
+
+##### 新增AddUserRequest结构体
+
+#### service/user.go
+
+##### 新增AddUser函数
+
+#### router/app.go
+
+##### 添加新增管理员信息路由地址
