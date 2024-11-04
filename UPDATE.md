@@ -145,3 +145,99 @@
 #### router/app.go文件下
 
 ##### 新增删除管理员路由地址
+
+## 角色模块功能实现
+
+### 角色模块搭建
+
+#### models/sys_role.go
+
+##### 设计角色数据结构
+
+### 获取角色列表数据
+
+#### models/sys_role.go
+
+##### 新增GetRoleList函数
+
+#### service/types.go
+
+##### 编写GetRoleListRequest数据结构
+
+##### 编写GetRoleListReply数据结构
+
+#### service/role.go
+
+##### 新建role.go文件
+
+##### 新增GetRoleList函数
+
+#### router/app.go
+
+##### 新增获取角色列表的路由
+
+### 添加角色功能
+
+#### service/types.go
+
+##### 新增AddRoleRequest结构体
+
+#### service/role.go
+
+##### 新增AddRole函数
+
+#### router/app.go
+
+##### 添加路由地址
+
+### 获取角色详情功能
+
+#### service/types.go
+
+##### 新增GetRoleDetailReply结构
+
+#### models/sys_role.go
+
+##### 新增GetRoleDetail函数
+
+#### service/role.go
+
+##### 新增GetRoleDetail函数
+
+#### router/app.go
+
+##### 新增路由地址
+
+### 更新角色信息功能
+
+#### service/types.go
+
+##### 新增UpdateRoleRequest结构体，代码如下所示：
+
+#### service/role.go
+
+##### 新增UpdateRole函数
+
+#### router/app.go
+
+##### 新增路由地址
+
+### 删除角色信息功能
+
+#### service/role.go
+
+##### 新增DeleteRole函数
+
+#### router/app.go
+
+##### 新增路由地址
+
+### 修改角色管理员功能
+
+#### service/role.go
+
+##### 新增PatchRoleAdmin函数
+
+#### router/app.go
+
+##### 添加路由地址
