@@ -39,6 +39,6 @@ func GetUserList(keyword string) *gorm.DB {
 // GetUserDetail 根据ID获取管理员信息
 func GetUserDetail(id uint) (*SysUser, error) {
 	su := new(SysUser)
-	err := DB.Model(new(SysUser)).Where("id=?", id).First(su).Error
+	err := DB.Model(new(SysUser)).Where("id = ?", id).First(su).Error
 	return su, err
 }

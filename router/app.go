@@ -19,8 +19,11 @@ func App() *gin.Engine {
 	// 新增管理员信息
 	r.POST("/user", service.AddUser)
 	// 获取管理员详情信息
-	r.GET("/user/detail:id", service.GetUserDetail)
-
+	r.GET("/user/detail/:id", service.GetUserDetail)
+	// 更新管理员信息
+	r.PUT("/user", service.UpdateUser)
+	// 删除管理员信息
+	r.DELETE("/user/:id", service.DeleteUser)
 	// 管理员 end
 
 	return r

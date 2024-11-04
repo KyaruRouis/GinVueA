@@ -122,3 +122,26 @@
 
 ##### 添加管理员详情信息路由地址
 
+### 更新管理员
+
+#### service/types.go
+
+##### 新增UpdateUserRequest结构体
+
+#### service/user.go
+
+##### 新增UpdateUser函数
+
+#### router/app.go
+
+##### 新增更新管理员信息路由地址
+
+### 删除管理员
+
+#### service/user.go
+
+##### 新增DeleteUser函数
+
+#### router/app.go文件下
+
+##### 新增删除管理员路由地址

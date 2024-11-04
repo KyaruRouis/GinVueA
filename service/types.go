@@ -43,8 +43,14 @@ type AddUserRequest struct {
 	Remarks  string `json:"remark"`
 }
 
-// GetUserDetailReply 获取管理员信息
+// GetUserDetailReply 获取管理员信息结构体
 type GetUserDetailReply struct {
+	ID uint `json:"id"`
+	AddUserRequest
+}
+
+// UpdateUserRequest 接收更新管理员信息参数的结构体
+type UpdateUserRequest struct {
 	ID uint `json:"id"`
 	AddUserRequest
 }
