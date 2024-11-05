@@ -13,7 +13,7 @@ import (
 // LoginPassword 用户登录
 func LoginPassword(c *gin.Context) {
 	in := new(LoginPasswordRequest)
-	err := c.ShouldBind(in)
+	err := c.ShouldBindJSON(in)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -35,7 +35,7 @@ func LoginPassword(c *gin.Context) {
 	}
 
 	// 生成token
-	token, err := helper.GenerateToken(sysUser.ID, sysUser.UserName, define.TokenExpire)
+	token, err := helper.GenerateToken(sysUser.ID, sysUser.RoleId, sysUser.UserName, define.TokenExpire)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -45,7 +45,8 @@ func LoginPassword(c *gin.Context) {
 	}
 
 	// 刷新token
-	refreshToken, err := helper.GenerateToken(sysUser.ID, sysUser.UserName, define.RefreshTokenExpire)
+	refreshToken, err := helper.GenerateToken(sysUser.ID, sysUser.RoleId, sysUser.UserName, define.RefreshTokenExpire)
+
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -65,4 +66,5 @@ func LoginPassword(c *gin.Context) {
 		"result":   data,
 		"userInfo": sysUser,
 	})
+
 }

@@ -40,7 +40,8 @@ type AddUserRequest struct {
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
 	Email    string `json:"email"`
-	Remarks  string `json:"remark"`
+	Remarks  string `json:"remarks"`
+	RoleId   uint   `json:"roleId"`
 }
 
 // GetUserDetailReply 获取管理员信息结构体
@@ -76,6 +77,7 @@ type AddRoleRequest struct {
 	Sort    int64  `json:"sort"`
 	IsAdmin int8   `json:"isAdmin"`
 	Remarks string `json:"remarks"`
+	MenuId  []uint `json:"menuId"` // 被授权的菜单列表
 }
 
 // GetRoleDetailReply 返回角色详情信息结构体

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"GinVueA/define"
 	"GinVueA/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -13,11 +14,12 @@ func GetMenuList(c *gin.Context) {
 
 // Menus 获取菜单列表数据
 func Menus(c *gin.Context) {
+	// 登录用户信息
+	userClaim := c.MustGet("UserClaim").(*define.UserClaim)
 	data := make([]*MenuReply, 0)
 	allMenus := make([]*AllMenu, 0)
-	// 获取所有菜单列表数据
-	tx := models.GetMenuList()
-	err := tx.Find(&allMenus).Error
+	// 根据角色获取所有菜单列表数据
+	tx, err := models.GetRoleMenus(userClaim.RoleId, userClaim.IsAdmin)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -25,6 +27,15 @@ func Menus(c *gin.Context) {
 		})
 		return
 	}
+	err = tx.Find(&allMenus).Error
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"msg":  "数据库异常",
+		})
+		return
+	}
+
 	data = allMenuToMenuReply(allMenus)
 	c.JSON(http.StatusOK, gin.H{
 		"code":   200,

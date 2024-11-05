@@ -316,6 +316,112 @@
 
 ##### 新增路由地址
 
+## 角色和菜单授权功能实现
+
+### 添加用户时绑定角色功能
+
+#### router/app.go
+
+##### 新增路由
+
+#### service/role.go
+
+##### 新增AllRole函数
+
+#### models/sys_user.go
+
+##### 修改SysUser结构体
+
+#### service/user.go
+
+##### 修改AddUser函数
+
+#### service/types.go
+
+##### 修改AddUserRequest结构体
+
+##### 新增AllRoleListReply结构体
+
+### 编辑用户时绑定角色
+
+#### service/user.go
+
+##### 修改GetUserDetail函数
+
+##### 修改UpdateUser函数
+
+### 添加角色时绑定菜单
+
+#### models/role_menu.go
+
+##### 新建role_menu.go文件
+
+##### 新增RoleMenu结构体
+
+##### 设置角色和菜单数据表的名称
+
+#### models/init.go
+
+##### 设置自动生成表结构
+
+#### service/types.go
+
+##### 修改AddRoleRequest结构体
+
+#### service/role.go
+
+##### 修改AddRole函数
+
+### 编辑角色时分配菜单
+
+#### service/role.go
+
+##### 修改GetRoleDetail函数
+
+##### 修改UpdateRole函数
+
+#### models/role_menu.go
+
+##### 新增GetRoleMenuId函数
+
+### 根据登录用户的角色获取相应菜单功能
+
+#### define/define.go
+
+##### 修改UserClaim结构体
+
+#### models/role_menu.go
+
+##### 新增GetRoleMenus函数
+
+#### service/menu.go
+
+##### 修改Menus函数，代码如下所示：
+
+#### middleware/cors.go
+
+##### 修改Cors函数
+
+### 登录认证功能
+
+#### helper/helper.go
+
+##### 新增AnalyzeToken函数
+
+##### 修改GenerateToken函数
+
+#### middleware/auth.go
+
+##### 新增LoginAuthCheck函数
+
+#### router/app.go
+
+##### 添加auth.go中间件
+
+#### service/login.go
+
+##### 修改LoginPassword函数
+
 
 
 ### 

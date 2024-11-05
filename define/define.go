@@ -6,19 +6,20 @@ import (
 )
 
 var (
-	// 密钥
+	// Jwtkey 密钥
 	Jwtkey = "sys-admin"
-	// token有效期，7天
+	// TokenExpire token有效期，7天
 	TokenExpire = time.Now().Add(time.Hour * 24 * 7).Unix()
-	// 刷新token有效期，14天
+	// RefreshTokenExpire 刷新token有效期，14天
 	RefreshTokenExpire = time.Now().Add(time.Hour * 24 * 14).Unix()
-	// 默认分页显示条数
+	// DefaultSize 默认分页显示条数
 	DefaultSize = 10
 )
 
 type UserClaim struct {
 	Id      uint
 	Name    string
-	IsAdmin bool // 是否管理员
+	IsAdmin bool // 是否超管
+	RoleId  uint // 所属角色
 	jwt.StandardClaims
 }

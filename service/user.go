@@ -72,6 +72,7 @@ func AddUser(c *gin.Context) {
 		Phone:    in.Phone,
 		Email:    in.Email,
 		Remarks:  in.Remarks,
+		RoleId:   in.RoleId,
 	}).Error
 
 	if err != nil {
@@ -91,7 +92,6 @@ func AddUser(c *gin.Context) {
 // GetUserDetail 根据ID获取管理员详情信息
 func GetUserDetail(c *gin.Context) {
 	id := c.Param("id")
-	//id := c.Query("id")
 	if id == "" {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -118,11 +118,14 @@ func GetUserDetail(c *gin.Context) {
 	data.Username = sysUser.UserName
 	data.Email = sysUser.Email
 	data.Password = sysUser.PassWord
+	data.RoleId = sysUser.RoleId
+
 	c.JSON(http.StatusOK, gin.H{
 		"code":   200,
 		"msg":    "获取数据成功",
 		"result": data,
 	})
+
 }
 
 // UpdateUser 修改管理员信息
@@ -162,6 +165,7 @@ func UpdateUser(c *gin.Context) {
 		"phone":    in.Phone,
 		"email":    in.Email,
 		"remarks":  in.Remarks,
+		"role_id":  in.RoleId,
 	}).Error
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -203,4 +207,10 @@ func DeleteUser(c *gin.Context) {
 		"code": 200,
 		"msg":  "删除成功",
 	})
+}
+
+// AllRoleListReply 返回角色数据的结构体
+type AllRoleListReply struct {
+	ID   uint   `json:"id"`
+	Name string `json:"name"`
 }

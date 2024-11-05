@@ -17,7 +17,7 @@ func NewGormDB() {
 		panic("failed to connect database")
 	}
 	// 自动建表
-	err = db.AutoMigrate(&SysUser{}, &SysRole{}, &SysMenu{})
+	err = db.AutoMigrate(&SysUser{}, &SysRole{}, &SysMenu{}, &RoleMenu{})
 
 	DB = db
 }

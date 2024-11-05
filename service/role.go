@@ -3,6 +3,7 @@ package service
 import (
 	"GinVueA/models"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 	"net/http"
 	"strconv"
 )
@@ -75,13 +76,43 @@ func AddRole(c *gin.Context) {
 		return
 	}
 
-	// 3、保存角色数据
-	err = models.DB.Create(&models.SysRole{
+	// 3、给角色授权的菜单
+	rms := make([]*models.RoleMenu, len(in.MenuId))
+	for i, _ := range rms {
+		rms[i] = &models.RoleMenu{
+			MenuId: in.MenuId[i],
+		}
+	}
+
+	// 4、组件角色数据
+	rb := &models.SysRole{
 		Name:    in.Name,
 		Sort:    in.Sort,
 		IsAdmin: in.IsAdmin,
 		Remarks: in.Remarks,
-	}).Error
+	}
+
+	// 5、新增角色数据
+	err = models.DB.Transaction(func(tx *gorm.DB) error {
+		// 保存角色
+		err = tx.Create(rb).Error
+		if err != nil {
+			return err
+		}
+
+		// 保存被授权菜单
+		for _, v := range rms {
+			v.RoleId = rb.ID
+		}
+		if len(rms) > 0 {
+			err = tx.Create(rms).Error
+			if err != nil {
+				return err
+			}
+		}
+		return nil
+
+	})
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -93,7 +124,7 @@ func AddRole(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
-		"msg":  "添加成功！",
+		"msg":  "添加角色成功！",
 	})
 }
 
@@ -124,6 +155,17 @@ func GetRoleDetail(c *gin.Context) {
 	data.Sort = sysRole.Sort
 	data.IsAdmin = sysRole.IsAdmin
 	data.Remarks = sysRole.Remarks
+
+	// 2、获取授权菜单
+	menuIds, err := models.GetRoleMenuId(sysRole.ID, sysRole.IsAdmin == 1)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"msg":  "获取数据失败！",
+		})
+		return
+	}
+	data.MenuId = menuIds
 	c.JSON(http.StatusOK, gin.H{
 		"code":   200,
 		"msg":    "获取数据成功",
@@ -163,18 +205,51 @@ func UpdateRole(c *gin.Context) {
 		})
 		return
 	}
-	// 3、更新数据
-	err = models.DB.Model(new(models.SysRole)).Where("id = ?", in.ID).Updates(map[string]any{
-		"name":     in.Name,
-		"is_admin": in.IsAdmin,
-		"sort":     in.Sort,
-		"remarks":  in.Remarks,
-	}).Error
+
+	// 3、修改数据
+	err = models.DB.Transaction(func(tx *gorm.DB) error {
+
+		// 4、更新数据
+		err = models.DB.Model(new(models.SysRole)).Where("id = ?", in.ID).Updates(map[string]any{
+			"name":     in.Name,
+			"is_admin": in.IsAdmin,
+			"sort":     in.Sort,
+			"remarks":  in.Remarks,
+		}).Error
+
+		if err != nil {
+			return err
+		}
+
+		// 5、删除该角色已经授权的菜单（删除老数据）(使用Unscoped进行硬删除)
+		err = tx.Where("role_id = ?", in.ID).Unscoped().Delete(new(models.RoleMenu)).Error
+		if err != nil {
+			return err
+		}
+
+		// 6、增加新授权的菜单数据
+		rms := make([]*models.RoleMenu, len(in.MenuId))
+		for i, _ := range rms {
+			rms[i] = &models.RoleMenu{
+				RoleId: in.ID,
+				MenuId: in.MenuId[i],
+			}
+		}
+
+		if len(rms) > 0 {
+			err = tx.Create(rms).Error
+			if err != nil {
+				return err
+			}
+		}
+		return nil
+
+	})
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
-			"msg":  "数据库异常",
+			"msg":  "更新失败",
 		})
 		return
 	}
@@ -238,6 +313,26 @@ func PatchRoleAdmin(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "修改管理员身份成功",
+	})
+
+}
+
+// AllRole 获取所有角色
+func AllRole(c *gin.Context) {
+	list := make([]*AllRoleListReply, 0)
+	err := models.DB.Model(models.SysRole{}).Find(&list).Error
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"msg":  "获取角色列表失败！",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":   200,
+		"msg":    "加载成功",
+		"result": list,
 	})
 
 }
