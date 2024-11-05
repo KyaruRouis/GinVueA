@@ -89,3 +89,45 @@ type UpdateRoleRequest struct {
 	ID uint `json:"id"`
 	AddRoleRequest
 }
+
+// MenuReply 菜单列表数据返回结构体
+type MenuReply struct {
+	ID            uint         `json:"id"`
+	ParentId      uint         `json:"parent_id"`
+	Name          string       `json:"name"`
+	WebIcon       string       `json:"web_icon"`
+	Sort          int          `json:"sort"`
+	Path          string       `json:"path"`
+	Level         int          `json:"level"`
+	ComponentName string       `json:"component_name"`
+	SubMenus      []*MenuReply `json:"sub_menus"`
+}
+
+// AllMenu 所有菜单数据结构体
+type AllMenu struct {
+	ID            uint   `json:"id"`
+	ParentId      uint   `json:"parent_id"`
+	Name          string `json:"name"`
+	WebIcon       string `json:"web_icon"`
+	Sort          int    `json:"sort"`
+	Path          string `json:"path"`
+	Level         int    `json:"level"`
+	ComponentName string `json:"component_name"`
+}
+
+// AddMenuRequest 新增菜单结构体
+type AddMenuRequest struct {
+	ParentId      uint   `json:"parent_id"`      // 父级菜单唯一标志，不填默认为顶级菜单
+	Name          string `json:"name"`           // 菜单名称
+	WebIcon       string `json:"web_icon"`       // 网页图标
+	Path          string `json:"path"`           // 路径
+	Sort          int    `json:"sort"`           // 排序
+	Level         int    `json:"level"`          // 菜单等级，{0：目录，1：菜单，2：按钮}
+	ComponentName string `json:"component_name"` // 组件路径
+}
+
+// UpdateMenuRequest 接收更新菜单信息的结构体
+type UpdateMenuRequest struct {
+	ID uint `json:"id"`
+	AddMenuRequest
+}

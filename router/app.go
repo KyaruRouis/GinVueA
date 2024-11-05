@@ -41,5 +41,16 @@ func App() *gin.Engine {
 	r.PATCH("/role/:id/:isAdmin", service.PatchRoleAdmin)
 	// 角色管理 end
 
+	// 菜单管理 start
+	// 菜单列表
+	r.GET("/menu", service.GetMenuList)
+	// 新增菜单
+	r.POST("/menu", service.AddMenu)
+	// 更新菜单
+	r.PUT("/menu", service.UpdateMenu)
+	// 删除菜单
+	r.DELETE("/menu/:id", service.DeleteMenu)
+	// 菜单管理 end
+
 	return r
 }

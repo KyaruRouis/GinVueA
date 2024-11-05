@@ -241,3 +241,81 @@
 #### router/app.go
 
 ##### 添加路由地址
+
+## 菜单模块功能实现
+
+### 编写菜单数据结构
+
+#### models/sys_menu.go
+
+### 设置自动建表
+
+#### models/init.go文件
+
+### 获取菜单列表数据
+
+#### service/types.go
+
+##### 新增MenuReply结构体
+
+##### 新增AllMenu结构体
+
+#### models/sys_menu.go
+
+##### 新增GetMenuList函数
+
+#### service/menu.go
+
+##### 新增GetMenuList函数
+
+##### 新增Menus的函数
+
+##### 新增allMenuToMenuReply函数
+
+##### 新增getChildrenMenu函数
+
+#### router/app.go
+
+##### 添加路由地址
+
+### 新增菜单功能
+
+#### service/types.go
+
+##### 新增AddMenuRequest结构体
+
+#### service/menu.go
+
+##### 新增AddMenu函数
+
+#### router/app.go
+
+##### 添加路由地址
+
+### 更新菜单信息功能
+
+#### service/types.go
+
+##### 新增UpdateMenuRequest结构体
+
+#### service/menu.go
+
+##### 新增UpdateMenu函数
+
+#### router/app.go
+
+##### 新增路由地址
+
+### 删除菜单信息功能
+
+#### service/menu.go
+
+##### 新增DeleteMenu函数
+
+#### router/app.go
+
+##### 新增路由地址
+
+
+
+### 
