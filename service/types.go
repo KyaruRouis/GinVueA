@@ -42,6 +42,8 @@ type AddUserRequest struct {
 	Email    string `json:"email"`
 	Remarks  string `json:"remarks"`
 	RoleId   uint   `json:"roleId"`
+	Avatar   string `json:"avatar"`
+	Sex      string `json:"sex"`
 }
 
 // GetUserDetailReply 获取管理员信息结构体
@@ -132,4 +134,10 @@ type AddMenuRequest struct {
 type UpdateMenuRequest struct {
 	ID uint `json:"id"`
 	AddMenuRequest
+}
+
+// UpdatePwdRequest 更新个人密码结构体
+type UpdatePwdRequest struct {
+	UsedPass string `json:"usedPass"`
+	NewPass  string `json:"newPass"`
 }

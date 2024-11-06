@@ -422,6 +422,102 @@
 
 ##### 修改LoginPassword函数
 
+## 个人信息设置功能
 
+### 上传头像功能
 
-### 
+#### define/define.go
+
+##### 定义静态文件目录
+
+#### router/app.go
+
+##### 设置静态资源路由
+
+##### 添加上传文件路由地址
+
+#### service/file.go
+
+##### 新建file.go文件
+
+##### 新增UploadFile函数
+
+##### 新增checkFileExt函数
+
+#### utils/gstr.go
+
+##### 新建utils目录
+
+##### 新增gstr.go文件
+
+### 更新个人基础信息功能
+
+#### router/app.go
+
+##### 添加路由地址
+
+#### service/types.go文件中
+
+##### 修改AddUserReques结构体
+
+#### service/user.go
+
+##### 新增UpdateInfo函数
+
+### 绑定邮箱功能
+
+#### 发送邮箱验证码功能
+
+##### router/app.go
+
+添加发送邮件路由地址
+
+##### service/user.go
+
+新增SendEmail函数
+
+##### utils/email.go
+
+新建email.go文件
+
+##### define/define.go
+
+配置邮箱信息
+
+#### 校验旧邮箱验证码功能
+
+##### router/app.go
+
+使用sessions中间件
+
+添加路由地址
+
+##### service/user.go
+
+修改SendEmail函数
+
+新增函数VerifyCode
+
+#### 更换新邮箱功能
+
+##### router/app.go
+
+新增路由地址
+
+##### service/user.go
+
+新增UpdateEmail函数
+
+### 更改个人密码功能
+
+#### router/app.go
+
+##### 添加一个路由地址
+
+#### service/types.go
+
+##### 新增UpdatePwdRequest结构体
+
+#### service/user.go
+
+##### 新增UpdatePwd函数

@@ -11,7 +11,7 @@ type SysUser struct {
 	WxOpenId  string `gorm:"column:wx_open_id;type:varchar(255);" json:"wxOpenId"`
 	Avatar    string `gorm:"column:avatar;type:varchar(255);" json:"avatar"`
 	Sex       string `gorm:"column:sex;type:varchar(20);" json:"sex"`
-	Email     string `gorm:"column:email;type:varchar(20);" json:"email"`
+	Email     string `gorm:"column:email;type:varchar(255);" json:"email"`
 	Remarks   string `gorm:"column:remarks;type:varchar(255);" json:"remarks"`
 	RoleId    uint   `gorm:"column:role_id;type:bigint(20);" json:"roleId"`
 }
