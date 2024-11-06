@@ -141,3 +141,35 @@ type UpdatePwdRequest struct {
 	UsedPass string `json:"usedPass"`
 	NewPass  string `json:"newPass"`
 }
+
+// IpInfo IP归属地详情结构体
+type IpInfo struct {
+	// 国家
+	Country string `json:"country"`
+	// 区域
+	Region string `json:"region"`
+	// 省份
+	Province string `json:"province"`
+	// 城市
+	City string `json:"city"`
+	// 运营商
+	Isp string `json:"isp"`
+}
+
+// GetLogListReply 返回日志信息的结构体
+type GetLogListReply struct {
+	ID          uint   `json:"id"`
+	Browser     string `json:"browser"`
+	ClassMethod string `json:"class_method"`
+	HttpMethod  string `json:"http_method"`
+	RemoteAddr  string `json:"remote_addr"`
+	StatusCode  int    `json:"status_code"`
+	UseTime     string `json:"use_time"`
+	CreatedAt   string `json:"created_at"`
+	IpInfo
+}
+
+// GetLogListRequest 获取日志类别参数结构体
+type GetLogListRequest struct {
+	*QueryRequest
+}

@@ -1,5 +1,3 @@
-[TOC]
-
 # 后端项目搭建
 
 ## 登录功能实现
@@ -523,3 +521,48 @@ models/init.go文件
 #### service/user.go
 
 新增UpdatePwd函数
+
+## 日志功能
+
+### 日志管理页面
+
+#### 页面布局
+
+##### src/views/system/log/LogList.vue
+
+新建log目录
+
+新建LogList.vue组件
+
+设计布局与样式
+
+### 获取日志列表数据功能
+
+#### src/views/system/log/LogList.vue
+
+新增loadData函数
+
+##### src/api/system/log/log.ts
+
+新增getLogListApi函数，代码如下所示：
+
+### 刷新和搜索日志列表数据功能
+
+#### src/views/system/log/LogList.vue
+
+新增refresh函数
+
+新增search函数
+
+修改loadData函数查询参数
+
+### 处理日志列表数据分页和序号功能
+
+#### src/views/system/log/LogList.vue
+
+修改分页组件
+
+新增changePage函数
+
+新增Nindex函数
+

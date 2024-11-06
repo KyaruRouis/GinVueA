@@ -24,6 +24,8 @@ var (
 	EmailHost = "smtp.qq.com"
 	// EmailPort 邮箱端口号
 	EmailPort = "587"
+	// DbPath ip2region存放路径
+	DbPath = StaticResource + "/ip2region/ip2region.xdb"
 )
 
 type UserClaim struct {

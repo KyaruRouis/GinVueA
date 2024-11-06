@@ -30,6 +30,10 @@ go get github.com/jordan-wright/email
 
 go get github.com/gin-contrib/sessions
 
+## ip2region插件
+
+go get github.com/lionsoul2014/ip2region/binding/golang
+
 # go run启动
 
 go run main.go
